@@ -7,7 +7,6 @@ class Book {
 }
 
 class UI {
-
   static displayBooks() {
     const books = Store.getBooks();
     books.forEach((book) => UI.addBookToList(book));
@@ -84,7 +83,6 @@ class Store {
 }
 
 document.addEventListener('DOMContentLoaded', UI.displayBooks);
-
 
 document.querySelector('#book-form').addEventListener('submit', (e) => {
   e.preventDefault();
