@@ -81,6 +81,22 @@ document.addEventListener('DOMContentLoaded', UI.displayBooks);
 //Event: Add
 //to add a book to the list 
 
+//want to grab the form and listen for the submit 
+//when submit happens, the arrow function executes
+document.querySelector('#book-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  //1st need to get the form values
+  //since this is an input, don't want the element, want the value
+  const title = document.querySelector('#title').value;
+  const author = document.querySelector('#author').value;
+  const isbn = document.querySelector('#isbn').value;
+
+  //2nd instantiate a book from the book class 
+  //need to instantiate because the method to add a book is not static
+
+  const book = new Book(title, author, isbn);
+  console.log(book);
+});
 
 
 
