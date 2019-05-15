@@ -53,7 +53,6 @@ class UI {
 
 }
 
-
 class Store {
 
   static getBooks() {
@@ -114,4 +113,3 @@ document.querySelector('#book-list').addEventListener('click', (e) => {
   Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
   UI.showAlert('Book successfully removed', 'success');
 });
-
