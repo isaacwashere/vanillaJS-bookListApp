@@ -61,11 +61,34 @@ class UI {
 
   static deleteBook(target) {
     if(target.classList.contains('delete') ) {
-      //target the delete button but want to remove the parent aka the whole row itself 
+      //target the delete button but want to remove the grandparent aka the whole row itself 
 
       //clicking the delete link, it's parent element is actually the 'td' and the 'td's parent element is the actual row, the "tr"
       target.parentElement.parentElement.remove();
     }
+  }
+
+  //for showing an alert that is more visually appealing 
+  //want a message and a class name so styling the alert is easiser
+  static showAlert(message, className) {
+    //going to build from scratch and insert in to the ui
+    
+    //final product/goal = <div class="alert alert-success or alert-danger">MESSGAGE</div>
+    const div = document.createElement('div');
+    div.className = `alert alert-${ className }`; //use className so that you can pass in success/danger instead of having to pass in alert-success or alert-danger
+    div.appendChild(document.createTextNode(message)); //want to put text in the div, text = message passed in 
+
+    const container = document.querySelector('.container');
+    const form = document.querySelector('#book-form');
+
+    container.insertBefore(div, form); //insert the div before the form
+
+    //want the error message to go away after "x" amount of seconds
+    setTimeout(() => document.querySelector('.alert').remove(), 1000); //setTimeout takes 2 parameters, a function and the number of milliseconds
+    //anything with class of alert wantto remove
+
+
+
   }
 
   //clears out the form on submission
@@ -107,16 +130,24 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
   const author = document.querySelector('#author').value;
   const isbn = document.querySelector('#isbn').value;
 
-  //2nd instantiate a book from the book class 
-  //need to instantiate because the method to add a book is not static
+  //2nd Validate to make sure all fields are filled in 
+  if(title === '' || author === '' || isbn === '') {
+    UI.showAlert('Please fill in all fields', 'danger');
+  }
+  else {
+    //3rd instantiate a book from the book class 
+    //need to instantiate because the method to add a book is not static
+    const book = new Book(title, author, isbn);
+  
+    //Add book to UI
+    UI.addBookToList(book);
 
-  const book = new Book(title, author, isbn);
-
-  //Add book to UI
-  UI.addBookToList(book);
-
-  //Clear fields after a book is submitted
-  UI.clearFields();
+    //Show success message when book is added properly
+    UI.showAlert('Book successfully added', 'success');
+  
+    //Clear fields after a book is submitted
+    UI.clearFields();
+  }
 });
 
 
@@ -129,6 +160,10 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 
 document.querySelector('#book-list').addEventListener('click', (e) => {
   UI.deleteBook(e.target)
+
+  //Show success message when book is added properly
+  UI.showAlert('Book removed', 'success');
+  
 });
 
 
