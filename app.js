@@ -198,13 +198,17 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 
 //because multiple delete events, not going to target an individual one 
 // use event propogation(select the entire booklist, the part above the delete and target what's clicked inside of it)
-
 document.querySelector('#book-list').addEventListener('click', (e) => {
+  
+  //removes book from UI
   UI.deleteBook(e.target)
+
+  //remove book from the store
+  //removeBook takes in the isbn
+  //parentElement is the "td" so neeed to traverse the DOM, to get to the sibling of the parent element
+  Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
+
   //Show success message when book is added properly
   UI.showAlert('Book successfully removed', 'success');
 });
-
-
-
 
