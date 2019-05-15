@@ -2,13 +2,63 @@
 //Represents a book, 
 //Each time a book is created, a book object will be instantiated
 
+class Book {
+  //constructor = a method that runs when a book is instantiated
+  constructor(title, author, isbn) {
+    this.title = title;
+    this.author = author;
+    this.isbn =  isbn;
+  }
+}
 
 
 
 //UI Class
 //Handle UI Tasks
 //when a book is displayed or removed or show an alert 
+//Don't want to have to instantiate the UI class so only using static methods
+class UI {
+  static displayBooks() {
+    const StoredBooks = [
+      {
+        title: "Vanilla JS",
+        author: "Mrs. J.S. Runs",
+        isbn: '23423424'
+      },
+      {
+        title: "Chocolate JS",
+        author: "Mr. J.S. Codes",
+        isbn: '23423424'
+      }
+    ];
 
+    //setting the constant books equal to the array of books 
+    const books = StoredBooks;
+    
+    //want to loop through the array of books and send it to the UI class that will display it in the list
+    books.forEach((book) => UI.addBookToList(book));
+  }
+
+  //here: create the row to put/inject into the tbody element in the html
+  static addBookToList(book) {
+    //grab onto the element in the dom that has an id of booklist
+    const list = document.querySelector('#book-list');
+
+    // now need to create a table row element aka want to insert a tr into the booklist
+    const row = document.createElement('tr');
+
+    //wnat to add the columns 
+    row.innerHTML = `
+      <td>${ book.title }</td>
+      <td>${ book.author }</td>
+      <td>${ book.isbn }</td>
+      <td><a href="#" class="btn btn-danger btn-sm delete">Remove</a></td>
+    `;
+
+    //append the row to the list 
+    list.appendChild(row);
+  }
+}
 
 
 
@@ -21,6 +71,9 @@
 
 //Events: Display
 //to display books and show them in the list 
+
+//as soon as the DOM loads, call UI.displayBooks
+document.addEventListener('DOMContentLoaded', UI.displayBooks);
 
 
 
