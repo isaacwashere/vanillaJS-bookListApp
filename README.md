@@ -34,7 +34,7 @@ This is a small, HTML and Vanilla JS, app that allows a user to add/save certain
 | Bootswatch - Sketchy | Styling                                      |
 
 * Using a traditional understanding of Vanilla JS classes to handle creating/adding a book, as well as deleting a book
-* A book is an object with a title, author, and ISB
+* A book is an object with a title, author, and ISBN
 
 
 ## Future Implementation(s)
