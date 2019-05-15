@@ -19,21 +19,8 @@ class Book {
 //Don't want to have to instantiate the UI class so only using static methods
 class UI {
   static displayBooks() {
-    const StoredBooks = [
-      {
-        title: "Vanilla JS",
-        author: "Mrs. J.S. Runs",
-        isbn: '23423424'
-      },
-      {
-        title: "Chocolate JS",
-        author: "Mr. J.S. Codes",
-        isbn: '23423424'
-      }
-    ];
-
-    //setting the constant books equal to the array of books 
-    const books = StoredBooks;
+    //setting the constant books equal to the array of stored books in local storage
+    const books = Store.getBooks();
     
     //want to loop through the array of books and send it to the UI class that will display it in the list
     books.forEach((book) => UI.addBookToList(book));
@@ -105,6 +92,57 @@ class UI {
 //Handles and takes care of storage
 //Right now this storage will be local storage i.e. in the browser
 
+class Store {
+  //3 methods, 1 to get books, add a book, and remove a book 
+  //need to make them static so can call them directly without have to instantiate the Store class
+
+  //since local storage only stores key value pairs (aka can't store objects), going to use an item call books which is...
+  //...going to be a string version of the entire array of books 
+  //before I add to local storage, going to stringify it and when I extract it going to parse it
+  static getBooks() {
+    let books; 
+    //check to see if there is a current book item in local storage 
+    if(localStorage.getItem('books') === null) {
+      books = []; 
+    }
+    else {
+      books = JSON.parse(localStorage.getItem('books')); //since books will be stored as string, need to run it through JSON.parse so can use it as an array of objects
+    }
+    return books;
+  }
+
+  static addBook(book) {
+    //grab whatever is stored in local storage
+    const books = Store.getBooks();
+
+    //push to that array whatever is passed in as a book
+    books.push(book);
+
+    //then reset it to the localstorage
+    //books is initially an array of objects so have to use JSON.stringify to make it a string so the UI add/display it
+    localStorage.setItem('books', JSON.stringify(books));
+
+
+  }
+
+  static removeBook(isbn) {
+    //remove by the isbn because the isbn is going to be unique, going to use this like an id or primary key
+
+    //1st get the bookss
+    const books = Store.getBooks();
+
+    //loop through the books with a forEach
+    books.forEach((book, index) => {
+      //if the current books isbn matches the one that is passed in for remove book
+      if(book.isbn === isbn) {
+        books.splice(index, 1);
+      }
+      //then need to reset local storage with that book removed 
+      localStorage.setItem('books', JSON.stringify(books));
+    });
+  }
+
+}
 
 
 
@@ -142,6 +180,9 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
     //Add book to UI
     UI.addBookToList(book);
 
+    //Add book to store
+    Store.addBook(book);
+
     //Show success message when book is added properly
     UI.showAlert('Book successfully added', 'success');
   
@@ -160,10 +201,8 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 
 document.querySelector('#book-list').addEventListener('click', (e) => {
   UI.deleteBook(e.target)
-
   //Show success message when book is added properly
-  UI.showAlert('Book removed', 'success');
-  
+  UI.showAlert('Book successfully removed', 'success');
 });
 
 
