@@ -95,7 +95,9 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
   //need to instantiate because the method to add a book is not static
 
   const book = new Book(title, author, isbn);
-  console.log(book);
+
+  //Add book to UI
+  UI.addBookToList(book);
 });
 
 
