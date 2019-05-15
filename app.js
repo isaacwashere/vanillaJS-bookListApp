@@ -58,6 +58,22 @@ class UI {
     //append the row to the list 
     list.appendChild(row);
   }
+
+  static deleteBook(target) {
+    if(target.classList.contains('delete') ) {
+      //target the delete button but want to remove the parent aka the whole row itself 
+
+      //clicking the delete link, it's parent element is actually the 'td' and the 'td's parent element is the actual row, the "tr"
+      target.parentElement.parentElement.remove();
+    }
+  }
+
+  //clears out the form on submission
+  static clearFields() {
+    document.querySelector('#title').value = '';
+    document.querySelector('#author').value = '';
+    document.querySelector('#isbn').value = '';
+  }
 }
 
 
@@ -98,12 +114,22 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 
   //Add book to UI
   UI.addBookToList(book);
+
+  //Clear fields after a book is submitted
+  UI.clearFields();
 });
 
 
 
 //Event: Remove
 //to remove a book (in the UI and local storage)
+
+//because multiple delete events, not going to target an individual one 
+// use event propogation(select the entire booklist, the part above the delete and target what's clicked inside of it)
+
+document.querySelector('#book-list').addEventListener('click', (e) => {
+  UI.deleteBook(e.target)
+});
 
 
 
