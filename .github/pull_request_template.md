@@ -1,23 +1,25 @@
-## Status
+### Status
 **READY/IN DEVELOPMENT/HOLD**
 
 
-## Description
+### Description
 A few sentences describing the overall goals of the pull request's commits.
 
 
-## Process
-How does the PR achieve its goals
+### Process
+Explain how this PR achieve's its goals.
 
 
-## Related PRs
-List related PRs against other branches:
+### Related PRs
+List related PRs:
 
 
-## Todos
+### Todos
 - [ ] Test(s)
 - [ ] Update Documentation
 
 
-## Steps to Test
+### Steps to Test
 Outline the steps to test this PR.
+
+
