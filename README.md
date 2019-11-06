@@ -23,6 +23,7 @@ This is a small, HTML and Vanilla JS, app that allows a user to add/save certain
 * A user can add a book to their local storage and view it in the UI
 * A user receives an error message if all the fields for adding a book are not complete
 * A user receives a success message when a book is deleted/added 
+* No 2 ISBN numbers can be the same
 
 
 ## Notable Technologies/Functions/Methods
@@ -39,7 +40,6 @@ This is a small, HTML and Vanilla JS, app that allows a user to add/save certain
 
 ## Future Implementation(s)
 
-* Make sure 2 ISBN numbers are not the same 
 * Make sure an ISBN number is ONLY numbers 
 * Make a GET Req to retrieve books from an API
 * User account 
