@@ -88,7 +88,7 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
     isbnList.push(singleBook.isbn);
   });
 
-  if(title === '' || author === '' || isbn === '') {
+  if(title === '' || author === '' || newISBN === '') {
     UI.showAlert('Please fill in all fields', 'danger');
   }
   else if(isbnList.includes(newISBN)) {
