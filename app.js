@@ -81,9 +81,18 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
   const title = document.querySelector('#title').value;
   const author = document.querySelector('#author').value;
   const isbn = document.querySelector('#isbn').value;
+  const oldBooks = Store.getBooks();
+  const isbnList = [];
+
+  oldBooks.map((singleBook) => {
+    isbnList.push(singleBook.isbn);
+  });
 
   if(title === '' || author === '' || isbn === '') {
     UI.showAlert('Please fill in all fields', 'danger');
+  }
+  else if(isbnList.includes(isbn)) {
+    UI.showAlert('This ISBN is already being used', 'danger');
   }
   else {
     const book = new Book(title, author, isbn);
