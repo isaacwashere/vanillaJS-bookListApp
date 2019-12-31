@@ -2,7 +2,7 @@
 
 This is a small, HTML and Vanilla JS, app that allows a user to add/save certain books to their local storage
 
-## How to Ru
+## How to Run
 
 1. Navigate to Terminal
 
