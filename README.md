@@ -4,7 +4,7 @@ This is a small, HTML and Vanilla JS, app that allows a user to add/save certain
 
 ## How to Run
 
-1. Navigate to Terminal
+1. Navigate to Termina
 
 > open directory in your Terminal
 
